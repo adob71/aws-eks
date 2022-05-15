@@ -1,3 +1,3 @@
 # eks-cluster
 
-[link](https://learn.hashicorp.com/tutorials/terraform/eks?in=terraform/kubernetes)
+[link](https://github.com/hashicorp/learn-terraform-provision-eks-cluster)

@@ -5,22 +5,19 @@ kubectl config view
 aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
 kubectl config view
 
-kubectl describe pods --namespace kube-system
-kubectl describe services --namespace kube-system
-kubectl get services --namespace kube-system
-kubectl get pods --namespace kube-system -o jsonpath={.items[*].spec.containers[*].name}
-
 kubectl describe pods --namespace default
 kubectl describe services --namespace default
 kubectl get services --namespace default
 kubectl get pods --namespace default -o jsonpath={.items[*].spec.containers[*].name}
 
-kubectl proxy --port=8080
-curl http://localhost:8080/api/
+kubectl describe pods --namespace kube-system
+kubectl describe services --namespace kube-system
+kubectl get services --namespace kube-system
+kubectl get pods --namespace kube-system -o jsonpath={.items[*].spec.containers[*].name}
 
 kubectl edit configmap aws-auth -n kube-system
 
-replace
+replace start
 
   mapUsers: |
     []
@@ -32,3 +29,7 @@ with
       - "system:masters"
       "userarn": "arn:aws:iam::011285877396:root"
 
+replace end
+
+kubectl proxy --port=8080
+curl http://localhost:8080/api/

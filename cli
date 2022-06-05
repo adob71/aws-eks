@@ -1,23 +1,27 @@
 aws eks list-clusters
 aws eks describe-cluster --name education-eks-hfL6pzCJ
 
-Configure kubectl
-Now that you've provisioned your EKS cluster, you need to configure kubectl.
-Run the following command to retrieve the access credentials for your cluster and automatically configure kubectl.
-
+kubectl config view
 aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
-
-
-kubectl describe pods --namespace kube-system
-kubectl describe services --namespace default
-kubectl describe services --namespace kube-system
 kubectl config view
 
+kubectl describe pods --namespace kube-system
+kubectl describe services --namespace kube-system
+kubectl get services --namespace kube-system
+kubectl get pods --namespace kube-system -o jsonpath={.items[*].spec.containers[*].name}
 
+kubectl describe pods --namespace default
+kubectl describe services --namespace default
+kubectl get services --namespace default
+kubectl get pods --namespace default -o jsonpath={.items[*].spec.containers[*].name}
+
+kubectl proxy --port=8080
+curl http://localhost:8080/api/
 
 kubectl edit configmap aws-auth -n kube-system
 
 replace
+
   mapUsers: |
     []
 
@@ -27,22 +31,4 @@ with
     - "groups":
       - "system:masters"
       "userarn": "arn:aws:iam::011285877396:root"
-
-
-
-kubectl proxy --port=8080
-curl http://localhost:8080/api/
-
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/recommended.yaml
-kubectl describe services --namespace kubernetes-dashboard
-
-kubectl proxy
-lynx http://127.0.0.1:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
-curl http://127.0.0.1:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/
-
-
-[ec2-user@ip-172-31-1-45 eks-cluster]$ kubectl get services --namespace kube-system
-[ec2-user@ip-172-31-1-45 eks-cluster]$ kubectl get services --namespace default
-[ec2-user@ip-172-31-1-45 eks-cluster]$ kubectl get pods --namespace kube-system -o jsonpath={.items[*].spec.containers[*].name}
-aws-node aws-node aws-node aws-node coredns coredns kube-proxy kube-proxy kube-proxy kube-proxy[ec2-user@ip-172-31-1-45 eks-cluster]$
 

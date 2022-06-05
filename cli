@@ -1,5 +1,5 @@
 aws eks list-clusters
-aws eks describe-cluster --name education-eks-hfL6pzCJ
+aws eks describe-cluster --name education-eks-xxxxxxxx
 
 kubectl config view
 aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
@@ -27,7 +27,7 @@ with
   mapUsers: |
     - "groups":
       - "system:masters"
-      "userarn": "arn:aws:iam::011285877396:root"
+      "userarn": "arn:aws:iam::AWS_ACCOUNT_ID:root"
 
 replace end
 

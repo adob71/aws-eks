@@ -21,8 +21,9 @@ module "eks" {
     },
     {
       name                          = "worker-group-2"
-      instance_type                 = "t2.small"
-      #instance_type                 = "t4g.small"
+      #instance_type                 = "t2.small"
+      instance_type                 = "t4g.small"
+      image_id                      = "ami-0780f3d52b2ba5c9b"
       additional_userdata           = "echo foo bar"
       additional_security_group_ids = [aws_security_group.worker_group_mgmt_two.id]
       asg_desired_capacity          = 2

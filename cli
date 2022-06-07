@@ -1,5 +1,5 @@
 aws eks list-clusters
-aws eks describe-cluster --name aws-eks-cicd
+aws eks describe-cluster --name aws-eks
 
 kubectl config view
 aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)

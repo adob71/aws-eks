@@ -33,3 +33,7 @@ replace end
 
 kubectl proxy --port=8080
 curl http://localhost:8080/api/
+
+git remote -v
+git remote set-url origin https://github.com/adob71/aws-eks-cicd
+

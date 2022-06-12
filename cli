@@ -31,3 +31,13 @@ kubectl describe services --namespace kube-system
 kubectl get pods --namespace kube-system -o jsonpath={.items[*].spec.containers[*].name}
 kubectl describe pods --namespace kube-system
 
+helm upgrade --install ingress-nginx ingress-nginx \
+  --repo https://kubernetes.github.io/ingress-nginx \
+  --namespace ingress-nginx --create-namespace
+
+kubectl get services --namespace ingress-nginx
+kubectl describe services --namespace ingress-nginx
+kubectl get pods --namespace ingress-nginx -o jsonpath={.items[*].spec.containers[*].name}
+kubectl describe pods --namespace ingress-nginx
+
+kubectl exec -it pod-name --namespace ingress-nginx -- bash

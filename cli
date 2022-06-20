@@ -30,3 +30,4 @@ kubectl get services --namespace kube-system
 kubectl describe services --namespace kube-system
 kubectl get pods --namespace kube-system -o jsonpath={.items[*].spec.containers[*].name}
 kubectl describe pods --namespace kube-system
+

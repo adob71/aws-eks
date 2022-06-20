@@ -9,8 +9,7 @@ provider "aws" {
 data "aws_availability_zones" "available" {}
 
 locals {
-  #cluster_name = "education-eks-${random_string.suffix.result}"
-  cluster_name = "aws-eks-cicd"
+  cluster_name = "aws-eks-poc"
 }
 
 resource "random_string" "suffix" {
@@ -22,7 +21,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "3.2.0"
 
-  name                 = "aws-eks-cicd-vpc"
+  name                 = "aws-eks-poc-vpc"
   cidr                 = "10.0.0.0/16"
   azs                  = data.aws_availability_zones.available.names
 

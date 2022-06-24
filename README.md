@@ -2,7 +2,6 @@
 
 ### Deployment
 ```
-$ terraform init
 $ terraform apply
 ```
 

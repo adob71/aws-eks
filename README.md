@@ -1,5 +1,16 @@
 ### System Overview
 
+### Deployment
+```
+$ terraform init
+$ terraform apply
+```
+
+### Decommissioning
+```
+$ terraform destroy
+```
+
 ### Project Structure
 ```
 .

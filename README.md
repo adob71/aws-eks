@@ -16,6 +16,7 @@ $ terraform destroy
 ├── eks.tf
 ├── kubernetes.tf
 ├── outputs.tf
+├── terraform.tfvars
 ├── versions.tf
 └── vpc.tf
 ```
